@@ -1,10 +1,19 @@
 const executaQuery = require("../database/queries");
 
 class Cliente {
-  lista() {
-    const sql = "SELECT * FROM Clientes";
+  async lista() {
+    const sqlCliente = "SELECT * FROM Clientes";
+    const sqlPet = "SELECT * FROM Pets";
 
-    return executaQuery(sql);
+    const clientes = await executaQuery(sqlCliente);
+    const pets = await executaQuery(sqlPet);
+
+    const clientesMaped = [...clientes].map((item) => {
+      const petsCliente = pets.filter((pet) => pet.donoId === item.id);
+      return { ...item, pets: petsCliente };
+    });
+
+    return clientesMaped;
   }
 
   async buscaPorId(id) {
