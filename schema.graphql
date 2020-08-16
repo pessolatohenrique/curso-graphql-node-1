@@ -7,7 +7,7 @@ type Cliente {
 type Pet {
   id: ID!
   nome: String!
-  donoId: Int!
+  dono: Cliente!
   tipo: String
   observacoes: String
 }
