@@ -23,6 +23,14 @@ type Mutation {
     tipo: String
     observacoes: String
   ): Pet!
+  atualizaPet(
+    id: ID!
+    nome: String!
+    donoId: Int!
+    tipo: String
+    observacoes: String
+  ): Pet!
+  deletaPet(id: ID!): ID!
 }
 
 type Query {
@@ -31,4 +39,5 @@ type Query {
   clientes: [Cliente!]!
   cliente(id: ID!): Cliente!
   pets: [Pet!]!
+  pet(id: ID!): Pet!
 }

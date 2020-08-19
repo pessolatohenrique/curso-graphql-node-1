@@ -19,10 +19,26 @@ class Pet {
     return petsMaped;
   }
 
-  buscaPorId(id) {
-    const sql = `SELECT * FROM Pets WHERE id=${parseInt(id)}`;
+  async buscaPorId(id) {
+    const sql = `SELECT Pets.id, Pets.nome, Pets.tipo, Pets.observacoes, Clientes.id AS clienteId, 
+    Clientes.nome AS clienteNome, Clientes.cpf AS clienteCpf 
+    FROM Pets INNER JOIN Clientes ON Pets.donoId = Clientes.id 
+    WHERE Pets.id=${parseInt(id)}`;
 
-    executaQuery(sql);
+    const result = await executaQuery(sql);
+
+    const pet = result[0];
+
+    const petMaped = {
+      ...pet,
+      dono: {
+        id: pet.clienteId,
+        nome: pet.clienteNome,
+        cpf: pet.clienteCpf,
+      },
+    };
+
+    return petMaped;
   }
 
   async adiciona(item) {
@@ -41,18 +57,28 @@ class Pet {
     };
   }
 
-  atualiza(novoItem, id) {
-    const { nome, dono, tipo, observacoes } = novoItem;
+  async atualiza(novoItem) {
+    const { id, nome, donoId, tipo, observacoes } = novoItem;
 
-    const sql = `UPDATE Pets SET nome='${nome}', donoId=${dono}, tipo='${tipo}', observacoes='${observacoes}' WHERE id=${id}`;
+    const sqlUpdate = `UPDATE Pets SET nome='${nome}', donoId=${donoId}, tipo='${tipo}', observacoes='${observacoes}' WHERE id=${id}`;
+    await executaQuery(sqlUpdate);
 
-    executaQuery(sql);
+    const sqlClient = `SELECT * FROM Clientes WHERE id = ${donoId}`;
+    const clientResponse = await executaQuery(sqlClient);
+
+    const response = {
+      ...novoItem,
+      dono: clientResponse[0],
+    };
+
+    return response;
   }
 
-  deleta(id) {
+  async deleta(id) {
     const sql = `DELETE FROM Pets WHERE id=${id}`;
+    await executaQuery(sql);
 
-    executaQuery(sql);
+    return id;
   }
 }
 

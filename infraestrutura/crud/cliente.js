@@ -17,10 +17,18 @@ class Cliente {
   }
 
   async buscaPorId(id) {
-    const sql = `SELECT * FROM Clientes WHERE id=${id}`;
-    const result = await executaQuery(sql);
+    const sqlCliente = `SELECT * FROM Clientes WHERE id=${id}`;
+    const resultCliente = await executaQuery(sqlCliente);
 
-    return result[0];
+    const sqlPet = `SELECT * FROM Pets WHERE donoId=${id}`;
+    const pets = await executaQuery(sqlPet);
+
+    const response = {
+      ...resultCliente[0],
+      pets: pets,
+    };
+
+    return response;
   }
 
   async adiciona(item) {
