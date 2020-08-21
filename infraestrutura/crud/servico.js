@@ -1,37 +1,46 @@
-const executaQuery = require('../database/queries')
+const executaQuery = require("../database/queries");
 
 class Servico {
-  lista(res) {
-    const sql = 'SELECT * FROM Servicos'
+  lista() {
+    const sql = "SELECT * FROM Servicos";
 
-    executaQuery(res, sql)
+    return executaQuery(sql);
   }
 
-  buscaPorId(res, id) {
-    const sql = `SELECT * FROM Servicos WHERE id=${parseInt(id)}`
+  async buscaPorId(id) {
+    const sql = `SELECT * FROM Servicos WHERE id=${parseInt(id)}`;
+    const result = await executaQuery(sql);
 
-    executaQuery(res, sql)
+    return result[0];
   }
 
-  adiciona(res, item) {
-    const { nome, preco, descricao } = item
-    const sql = `INSERT INTO Servicos(nome, Preco, Descricao) VALUES('${nome}', ${preco}, '${descricao}')`
+  async adiciona(item) {
+    const { nome, preco, descricao } = item;
+    const sql = `INSERT INTO Servicos(nome, Preco, Descricao) VALUES('${nome}', ${preco}, '${descricao}')`;
 
-    executaQuery(res, sql)
+    const response = await executaQuery(sql);
+    const finalResponse = {
+      id: response.insertId,
+      ...item,
+    };
+
+    return finalResponse;
   }
 
-  atualiza(res, novoItem, id) {
-    const { nome, preco, descricao } = novoItem
-    const sql = `UPDATE Servicos SET nome='${nome}', Preco=${preco}, Descricao='${descricao}' WHERE id=${id}`
+  async atualiza(novoItem) {
+    const { id, nome, preco, descricao } = novoItem;
+    const sql = `UPDATE Servicos SET nome='${nome}', Preco=${preco}, Descricao='${descricao}' WHERE id=${id}`;
+    await executaQuery(sql);
 
-    executaQuery(res, sql)
+    return novoItem;
   }
 
-  deleta(res, id) {
-    const sql = `DELETE FROM Servicos WHERE id=${id}`
+  async deleta(id) {
+    const sql = `DELETE FROM Servicos WHERE id=${id}`;
+    await executaQuery(sql);
 
-    executaQuery(res, sql)
+    return id;
   }
 }
 
-module.exports = new Servico
+module.exports = new Servico();
