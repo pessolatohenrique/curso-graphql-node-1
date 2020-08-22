@@ -1,6 +1,6 @@
 # Agenda-Petshop
 
-Projeto de Petshop construído com base em curso do Alura [Link do curso](https://cursos.alura.com.br/course/graphql).
+Projeto de Petshop construído com base nos cursos: [GraphQL Parte 1: Primeiros Passos](https://cursos.alura.com.br/course/graphql) e [GraphQL parte 2: Substituindo uma API REST por GraphQL](https://cursos.alura.com.br/course/graphql-parte-dois).
 
 ## Baixando o projeto
 
@@ -29,10 +29,6 @@ Dentro da pasta, faça a instalação do projeto:
 ```
 
 Criar arquivo .env e configurar as variáveis de ambiente, semelhantes ao arquivo ".env-example":
-
-```
-  npm install
-```
 
 E, por fim, rode o projeto:
 
