@@ -1,0 +1,17 @@
+type Grafico {
+  label: String!
+  data: Int!
+}
+
+type Indicador {
+  totalAtendimentos: Int!
+  totalClientes: Int!
+  totalPets: Int!
+  totalServicos: Int!
+  servicos: [Grafico!]!
+  clientes: [Grafico!]!
+}
+
+type Query {
+  indicadores: Indicador!
+}
