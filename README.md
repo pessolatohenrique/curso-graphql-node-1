@@ -1,32 +1,23 @@
-# Agenda-Petshop
+# Agenda Petshop (Backend)
+
+### Sobre
 
 Projeto de Petshop construído com base nos cursos: [GraphQL Parte 1: Primeiros Passos](https://cursos.alura.com.br/course/graphql) e [GraphQL parte 2: Substituindo uma API REST por GraphQL](https://cursos.alura.com.br/course/graphql-parte-dois).
 
-## Baixando o projeto
+### Tecnologias
 
-### Tenho usuário no github e git instalado!
+- Node.js
+- GraphQL Yoga
 
-Depois, dentro do repositório no seu perfil, clique em clone e copie o link
+### Instalação do projeto
 
-Depois navegue pela linha de comando até a pasta onde salva os seus projetos e clone o seu projeto:
+Realizar o clone do projeto
 
-```
-  git clone <link>
-```
+    git clone https://github.com/USER/curso-graphql-node.git
 
-Depois que o repositório estiver baixado, entre na pasta que foi clonada:
+Acesse a pasta do projeto e rode o comando para instalar as dependências npm:
 
-```
-  cd <nome da pasta>
-```
-
-## Instalação
-
-Dentro da pasta, faça a instalação do projeto:
-
-```
-  npm install
-```
+    npm install
 
 Criar arquivo .env e configurar as variáveis de ambiente, semelhantes ao arquivo ".env-example":
 
